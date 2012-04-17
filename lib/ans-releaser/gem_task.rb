@@ -9,7 +9,12 @@ module Ans::Releaser::GemTask
   end
 
   def version_file
-    Dir["lib/*/version.rb"].first
+    @version_file ||= Dir["lib/*/version.rb"].first
+  end
+
+  def after_up_version
+    # バージョンを再読み込み
+    load version_file
   end
 
   def is_rubygem
