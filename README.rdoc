@@ -14,7 +14,7 @@
    end
 
    def is_rubygem
-     true # rubygem に push するなら true
+     false # rubygem に push するなら true
    end
    def gem_host
      "gem.host.domain" # gem を push するホスト名

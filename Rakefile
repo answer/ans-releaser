@@ -10,9 +10,6 @@ class Ans::Releaser::Task
   end
   extend ClassMethods
 
-  def is_rubygem
-    false
-  end
   def gem_host
     "gem.ans-web.co.jp"
   end

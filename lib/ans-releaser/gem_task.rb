@@ -13,7 +13,7 @@ module Ans::Releaser::GemTask
   end
 
   def is_rubygem
-    true
+    false
   end
   def gem_host
     "gem.host.domain"
