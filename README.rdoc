@@ -9,10 +9,6 @@
  class MyTask
    include Ans::Releaser::GemTask
 
-   def stages
-     [:release]
-   end
-
    def editor
      "vi"
    end

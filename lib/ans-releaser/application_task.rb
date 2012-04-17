@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 module Ans::Releaser::GemTask
   include Rake::DSL if defined? Rake::DSL
+  include Ans::Releaser::ReleaseHelper
 
   def stages
     [:release,:staging]

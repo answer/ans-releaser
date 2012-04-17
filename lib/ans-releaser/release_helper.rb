@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 module Ans::Releaser::ReleaseHelper
   include Rake::DSL if defined? Rake::DSL
 
@@ -11,6 +13,7 @@ module Ans::Releaser::ReleaseHelper
     depends_on.unshift :up_version
 
     stages.each do |stage|
+      desc "リリース to #{stage}"
       task stage do
         perform_release stage
       end
