@@ -12,7 +12,7 @@ class Ans::Releaser::Task
 
   def after_up_version
     # バージョンを再読み込み
-    eval(File.read("lib/ans-releaser/version.rb"))
+    load "lib/ans-releaser/version.rb"
   end
 
   def gem_host
