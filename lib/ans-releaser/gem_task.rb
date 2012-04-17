@@ -51,8 +51,13 @@ module Ans::Releaser::GemTask
   end
 
   def version
-    gemspec = Bundler.load_gemspec(spec_path)
     gemspec.version
+  end
+  def name
+    gemspec.name
+  end
+  def gemspec
+    @gemspec = Bundler.load_gemspec(spec_path)
   end
 
   def build_gem
