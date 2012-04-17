@@ -7,6 +7,7 @@ module Ans::Releaser::ReleaseHelper
     task :up_version do
       sh "#{editor} #{version_file}"
       git_commit version_file, "up version"
+      after_up_version
     end
 
     depends_on = depends_on || []
