@@ -57,6 +57,7 @@ module Ans::Releaser::GemTask
     gemspec.name
   end
   def gemspec
+    puts File.read(spec_path)
     @gemspec ||= Bundler.load_gemspec(spec_path)
   end
 
