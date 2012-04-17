@@ -43,6 +43,9 @@ module Ans::Releaser::GemTask
     }
   end
 
+  def base
+    @base ||= Dir.pwd
+  end
   def spec_path
     @spec_path ||= Dir[File.join(base, "{,*}.gemspec")].first
   end
@@ -53,8 +56,6 @@ module Ans::Releaser::GemTask
   end
 
   def build_gem
-    base = Dir.pwd
-
     file_name = nil
     sh("gem build -V '#{spec_path}'") { |out, code|
       file_name = File.basename(built_gem_path)
