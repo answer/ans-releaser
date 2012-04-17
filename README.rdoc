@@ -1,3 +1,98 @@
 = ans-releaser
 
 リリースのためのタスクを提供する
+
+(ほぼ bundler のコード)
+
+== gem のリリース
+
+ class MyTask
+   include Ans::Releaser::GemTask
+
+   def stages
+     [:release]
+   end
+
+   def editor
+     "vi"
+   end
+
+   def version_file
+     Dir["lib/*/version.rb"].first
+   end
+
+   def is_rubygem
+     true # rubygem に push するなら true
+   end
+   def gem_host
+     "gem.host.domain" # gem を push するホスト名
+   end
+   def gem_root
+     "/path/to/gems/dir" # generate_index を走らせるディレクトリ(この下に gems ディレクトリがある)
+   end
+   def remote_rvm_path
+     "/usr/local/rvm" # リモートホストの rvm_path
+   end
+   def remote_ruby_version
+     "1.9.2" # generate_index を走らせる rvm のバージョン
+   end
+ end
+
+ namespace :my_task do
+   MyTask.new.build_release_tasks
+ end
+
+以下のタスクが使用可能
+
+ $ rake my_task:release
+
+== アプリケーションのリリース
+
+ class MyTask
+   include Ans::Releaser::ApplicationTask
+
+   def stages
+     [:release, :staging]
+   end
+
+   def editor
+     "vi"
+   end
+
+   def version_file
+     "config/initializer/version.rb"
+   end
+
+   def depends_on
+     [:environment]
+   end
+
+   def deploy(stage)
+     cap_stage = stage
+	   cap_stage = "production" if stage == :release
+     sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{stage} deploy:update'"
+   end
+ end
+
+ namespace :my_task do
+   MyTask.new.build_release_tasks
+ end
+
+以下のタスクが使用可能
+
+ $ rake my_task:release
+ $ rake my_task:staging
+
+
+== 概要
+
+1. バージョンが書いてあるファイルを編集後、 commit
+2. バージョンを読み込んでタグを作成
+3. git pull && git push
+4. リリース
+
+リリースの作業は、
+
+* GemTask の場合、 gem サーバーに push
+* ApplicationTask の場合、 deploy メソッドの呼出(capistrano でデプロイ)
+
