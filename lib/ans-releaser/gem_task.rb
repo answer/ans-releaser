@@ -38,7 +38,7 @@ module Ans::Releaser::GemTask
       if is_rubygem
         rubygem_push gem_path
       else
-        gem_push gem_path
+        private_gem_push gem_path
       end
     }
   end
