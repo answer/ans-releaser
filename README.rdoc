@@ -17,10 +17,6 @@
      "vi"
    end
 
-   def version_file
-     Dir["lib/*/version.rb"].first
-   end
-
    def is_rubygem
      true # rubygem に push するなら true
    end
@@ -51,25 +47,16 @@
  class MyTask
    include Ans::Releaser::ApplicationTask
 
-   def stages
-     [:release, :staging]
-   end
-
    def editor
      "vi"
    end
-
-   def version_file
-     "config/initializer/version.rb"
-   end
-
-   def depends_on
-     [:environment]
+   def version
+     MyApp::VERSION
    end
 
    def deploy(stage)
      cap_stage = stage
-	   cap_stage = "production" if stage == :release
+     cap_stage = "production" if stage == :release
      sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{stage} deploy:update'"
    end
  end
@@ -96,3 +83,4 @@
 * GemTask の場合、 gem サーバーに push
 * ApplicationTask の場合、 deploy メソッドの呼出(capistrano でデプロイ)
 
+bundler 内から呼び出すので、 capistrano は Gemfile に含まれる必要がある
