@@ -33,7 +33,7 @@ module Ans::Releaser::GemTask
     guard_clean
     guard_already_tagged stage
     gem_path = build_gem
-    tag_version stage {
+    tag_version(stage) {
       git_push
       if is_rubygem
         rubygem_push gem_path
