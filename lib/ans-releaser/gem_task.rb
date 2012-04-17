@@ -51,13 +51,14 @@ module Ans::Releaser::GemTask
   end
 
   def version
+    Bundler.clear_gemspec_cache
     gemspec.version
   end
   def name
     gemspec.name
   end
   def gemspec
-    @gemspec = Bundler.load_gemspec_uncached(spec_path)
+    @gemspec = Bundler.load_gemspec(spec_path)
   end
 
   def build_gem
