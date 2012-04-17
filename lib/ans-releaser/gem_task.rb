@@ -51,7 +51,6 @@ module Ans::Releaser::GemTask
   end
 
   def version
-    Bundler.clear_gemspec_cache
     gemspec.version
   end
   def name
