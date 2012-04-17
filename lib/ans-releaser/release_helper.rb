@@ -21,6 +21,10 @@ module Ans::Releaser::ReleaseHelper
     end
   end
 
+  def after_up_version
+    # バージョンを上げた後にやる作業
+  end
+
   def editor
     "vi"
   end

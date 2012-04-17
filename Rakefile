@@ -10,6 +10,11 @@ class Ans::Releaser::Task
   end
   extend ClassMethods
 
+  def after_up_version
+    # バージョンを再読み込み
+    eval(File.read("lib/ans-releaser/version.rb".expand_path))
+  end
+
   def gem_host
     "gem.ans-web.co.jp"
   end

@@ -8,8 +8,12 @@ module Ans::Releaser::GemTask
     [:release,:staging]
   end
 
-  def depends_on
-    [:environment]
+  def version_file
+    "config/initializers/version.rb"
+  end
+  def version
+    require "config/initializers/version"
+    application.const_get("VERSION")
   end
 
   def perform_release(stage)

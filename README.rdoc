@@ -46,14 +46,9 @@
    def editor
      "vi"
    end
-   def version
-     MyApp::VERSION
-   end
 
-   def deploy(stage)
-     cap_stage = stage
-     cap_stage = "production" if stage == :release
-     sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{stage} deploy:update'"
+   def application
+     MyApp
    end
  end
 
