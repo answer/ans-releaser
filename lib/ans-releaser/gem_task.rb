@@ -8,6 +8,10 @@ module Ans::Releaser::GemTask
     [:release]
   end
 
+  def version_file
+    Dir["lib/*/version.rb"].first
+  end
+
   def is_rubygem
     true
   end
