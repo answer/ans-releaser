@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-module Ans::Releaser::GemTask
+module Ans::Releaser::ApplicationTask
   include Rake::DSL if defined? Rake::DSL
   include Ans::Releaser::ReleaseHelper
 
