@@ -20,7 +20,6 @@ module Ans::Releaser::ApplicationTask
     git_pull
     guard_clean
     guard_already_tagged stage
-    gem_path = build_gem
     tag_version stage {
       git_push
       deploy
