@@ -22,14 +22,14 @@ module Ans::Releaser::ApplicationTask
     guard_already_tagged stage
     tag_version(stage){
       git_push
-      deploy
+      deploy stage
     }
   end
 
   def deploy(stage)
     cap_stage = stage
 	  cap_stage = "production" if stage == :release
-    sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{stage} deploy:update'"
+    sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{cap_stage} deploy:update'"
   end
 
 end
