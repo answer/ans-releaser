@@ -20,7 +20,7 @@ module Ans::Releaser::ApplicationTask
     git_pull
     guard_clean
     guard_already_tagged stage
-    tag_version stage {
+    tag_version(stage){
       git_push
       deploy
     }
