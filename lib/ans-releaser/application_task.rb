@@ -12,7 +12,7 @@ module Ans::Releaser::ApplicationTask
     "config/initializers/version.rb"
   end
   def version
-    require "config/initializers/version"
+    load version_file
     application.const_get("VERSION")
   end
 
