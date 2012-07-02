@@ -137,7 +137,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 リリースの作業は、
 
 * GemTask の場合、 gem サーバーに push
-* ApplicationTask の場合、 deploy メソッドの呼出(capistrano でデプロイ)
+* ApplicationTask の場合、 `RELEASE_TAG={タグ} cap {production|staging} deploy` コマンドを発行
 
 bundler 内から呼び出すので、 capistrano は Gemfile に含まれる必要がある
 
