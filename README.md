@@ -33,7 +33,7 @@ gem のリリース
 
 	GemReleaseTask.new.build_release_tasks
 
-### rubygens への gem のリリース ###
+### rubygems への gem のリリース ###
 
 	# rubygems に push する場合
 	class GemReleaseTask
@@ -72,6 +72,14 @@ gem のリリース
 
 	$ rake release
 	$ rake staging
+
+config/initializer/version.rb に以下の内容を保存
+
+	module MyApp
+	  VERSION = "0.0.0"
+	end
+
+MyApp はアプリケーションモジュールの名前を指定する
 
 
 設定
