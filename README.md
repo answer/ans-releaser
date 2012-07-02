@@ -5,6 +5,15 @@ ans-releaser
 
 (ほぼ bundler のコード)
 
+インストール
+------------
+
+	gem "ans-releaser"
+
+グループは :deployment でよい
+
+Rakefile や、 lib/tasks/release.rake 等に追加
+
 gem のリリース
 --------------
 
@@ -44,15 +53,20 @@ gem のリリース
 アプリケーションのリリース
 --------------------------
 
-	class ApplicationReleaseTask
-	  include Ans::Releaser::ApplicationTask
+	begin
+	  class ApplicationReleaseTask
+	    include Ans::Releaser::ApplicationTask
 
-	  def application
-	    MyApp
+	    def application
+	      MyApp
+	    end
 	  end
-	end
 
-	ApplicationReleaseTask.new.build_release_tasks
+	  ApplicationReleaseTask.new.build_release_tasks
+
+	rescue NameError => ignore_unload_gem_error
+	  # releaser は deployment グループでインストールするので、本番環境では存在しない
+	end
 
 以下のタスクが使用可能
 
