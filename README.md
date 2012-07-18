@@ -20,6 +20,7 @@ gem のリリース
 ### プライベートホストへの gem のリリース ###
 
 	# プライベートホストに push する場合
+	require "ans-releaser"
 	class GemReleaseTask
 	  include Ans::Releaser::GemTask
 
@@ -36,6 +37,7 @@ gem のリリース
 ### rubygems への gem のリリース ###
 
 	# rubygems に push する場合
+	require "ans-releaser"
 	class GemReleaseTask
 	  include Ans::Releaser::GemTask
 
@@ -54,6 +56,7 @@ gem のリリース
 --------------------------
 
 	begin
+	  require "ans-releaser"
 	  class ApplicationReleaseTask
 	    include Ans::Releaser::ApplicationTask
 
@@ -87,6 +90,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 
 オーバーライド可能なメソッドとデフォルト
 
+	require "ans-releaser"
 	class GemReleaseTask
 	  include Ans::Releaser::GemTask
 
@@ -111,6 +115,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  end
 	end
 
+	require "ans-releaser"
 	class ApplicationReleaseTask
 	  include Ans::Releaser::ApplicationTask
 
