@@ -4,6 +4,10 @@ module Ans::Releaser::ReleaseHelper
   include Rake::DSL if defined? Rake::DSL
 
   def build_release_tasks
+    task :guard_clean do
+      guard_clean
+    end
+
     task :up_version do
       sh "#{editor} #{version_file}"
       git_commit version_file, "up version"
@@ -11,7 +15,7 @@ module Ans::Releaser::ReleaseHelper
     end
 
     depends_on = depends_on || []
-    depends_on.unshift :up_version
+    depends_on.unshift :guard_clean, :up_version
 
     stages.each do |stage|
       desc "リリース to #{stage}"
