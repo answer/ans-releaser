@@ -14,15 +14,15 @@ module Ans::Releaser::ReleaseHelper
       after_up_version
     end
 
-    depends_on = depends_on || []
-    depends_on.push :guard_clean, :up_version
+    depend_tasks = depends_on || []
+    depend_tasks.push :guard_clean, :up_version
 
     stages.each do |stage|
       desc "リリース to #{stage}"
       task stage do
         perform_release stage
       end
-      task stage => depends_on
+      task stage => depend_tasks
     end
   end
 
