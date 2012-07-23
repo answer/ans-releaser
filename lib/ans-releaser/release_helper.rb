@@ -15,7 +15,7 @@ module Ans::Releaser::ReleaseHelper
     end
 
     depends_on = depends_on || []
-    depends_on.unshift :guard_clean, :up_version
+    depends_on.push :guard_clean, :up_version
 
     stages.each do |stage|
       desc "リリース to #{stage}"
