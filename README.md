@@ -63,6 +63,10 @@ gem のリリース
 	    def application
 	      MyApp
 	    end
+
+	    def depends_on
+	      [:"assets:precompile"] # asset pipeline
+	    end
 	  end
 
 	  ApplicationReleaseTask.new.build_release_tasks
@@ -113,6 +117,10 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  def remote_ruby_version
 	    "1.9.2" # generate_index を走らせる rvm のバージョン
 	  end
+
+	  def depends_on
+	    [] # バージョンファイルを変更する前に実行するタスク
+	  end
 	end
 
 	require "ans-releaser"
@@ -125,6 +133,10 @@ MyApp はアプリケーションモジュールの名前を指定する
 
 	  def application
 	    MyApp
+	  end
+
+	  def depends_on
+	    [] # バージョンファイルを変更する前に実行するタスク
 	  end
 	end
 
