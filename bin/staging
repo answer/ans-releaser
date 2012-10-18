@@ -1,3 +1,7 @@
-#!/bin/bash
+# -*- coding: UTF-8 -*-
 
-echo "staging"
+unless branch = ARGV[0]
+  puts "ブランチ名を指定してください: staging {branch}"
+else
+  `git fetch origin && git checkout -b #{branch} origin/#{branch} && rake staging`
+end
