@@ -15,6 +15,9 @@ module Ans::Releaser::ApplicationTask
     load version_file
     application.const_get("VERSION")
   end
+  def version_tag_suffix(stage)
+    `git symbolic-ref HEAD`.gsub(%r{^refs/heads/}, "")
+  end
 
   def perform_release(stage)
     git_pull
