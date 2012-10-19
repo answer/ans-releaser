@@ -84,7 +84,10 @@ module Ans::Releaser::ReleaseHelper
   end
 
   def version_tag(stage)
-    "v#{version}-#{stage}"
+    "v#{version}-#{version_tag_suffix stage}"
+  end
+  def version_tag_suffix(stage)
+    stage
   end
 
   def sh_with_code(cmd, &block)
