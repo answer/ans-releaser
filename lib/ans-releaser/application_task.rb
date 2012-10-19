@@ -15,7 +15,13 @@ module Ans::Releaser::ApplicationTask
     load version_file
     application.const_get("VERSION")
   end
+  def version_message(stage)
+    " by #{stage} ( #{branch} )"
+  end
   def version_tag_suffix(stage)
+    "-#{stage}.#{branch}"
+  end
+  def branch
     `git symbolic-ref HEAD`.gsub(%r{^refs/heads/}, "")
   end
 
