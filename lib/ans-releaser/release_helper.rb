@@ -47,7 +47,7 @@ module Ans::Releaser::ReleaseHelper
   end
 
   def tag_version(stage)
-    sh "git tag -a -m \"Version #{version} on #{stage}\" #{version_tag stage}"
+    sh "git tag -a -m \"Version #{version}#{version_message stage}\" #{version_tag stage}"
     yield if block_given?
   rescue
     sh_with_code "git tag -d #{version_tag stage}"
@@ -83,11 +83,12 @@ module Ans::Releaser::ReleaseHelper
     end
   end
 
+  def version_message(stage)
+  end
   def version_tag(stage)
-    "v#{version}-#{version_tag_suffix stage}"
+    "v#{version}#{version_tag_suffix stage}"
   end
   def version_tag_suffix(stage)
-    stage
   end
 
   def sh_with_code(cmd, &block)
