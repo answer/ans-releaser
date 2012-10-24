@@ -22,7 +22,7 @@ module Ans::Releaser::ApplicationTask
     "-#{stage}.#{branch}"
   end
   def branch
-    `git symbolic-ref HEAD`.gsub(%r{^refs/heads/}, "")
+    `git symbolic-ref HEAD`.gsub(%r{^refs/heads/}, "").strip
   end
 
   def perform_release(stage)
