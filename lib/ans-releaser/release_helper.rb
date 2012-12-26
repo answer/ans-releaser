@@ -23,7 +23,7 @@ module Ans::Releaser::ReleaseHelper
                 minor = versions.pop.to_i + 1
                 versions.push minor
               }.join(".")
-              line.gsub! version_pattern, "VERSION = #{new_version}"
+              line.gsub! version_pattern, %{VERSION = "#{new_version}"}
             end
             version_content.push line
           end
