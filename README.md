@@ -99,7 +99,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  include Ans::Releaser::GemTask
 
 	  def editor
-	    ""
+	    nil
 	  end
 
 	  def is_rubygem
@@ -128,7 +128,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  include Ans::Releaser::ApplicationTask
 
 	  def editor
-	    ""
+	    nil
 	  end
 
 	  def application
