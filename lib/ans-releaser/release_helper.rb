@@ -9,7 +9,27 @@ module Ans::Releaser::ReleaseHelper
     end
 
     task :up_version do
-      sh "#{editor} #{version_file}"
+      if editor
+        sh "#{editor} #{version_file}"
+      else
+        File.open version_file, "r" do |f|
+          version_content = []
+          while line = f.gets
+            if line =~ /VERSION\s*=\s*"([0-9.]*)"/
+              old_version = $1
+              new_version = $1.split(".").tap{|versions|
+                minor = versions.pop.to_i + 1
+                versions.push minor
+              }.join(".")
+            end
+            version_content.push line
+          end
+        end
+
+        File.open version_file, "w" do |f|
+          f.puts version_content.join "\n"
+        end
+      end
       git_commit version_file, "up version"
       after_up_version
     end
@@ -31,7 +51,6 @@ module Ans::Releaser::ReleaseHelper
   end
 
   def editor
-    "vi"
   end
 
   def depends_on

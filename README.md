@@ -10,7 +10,7 @@ ans-releaser
 
 	gem "ans-releaser"
 
-グループは :deployment でよい
+グループは :development でよい
 
 Rakefile や、 lib/tasks/release.rake 等に追加
 
@@ -99,7 +99,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  include Ans::Releaser::GemTask
 
 	  def editor
-	    "vi"
+	    nil
 	  end
 
 	  def is_rubygem
@@ -128,7 +128,7 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  include Ans::Releaser::ApplicationTask
 
 	  def editor
-	    "vi"
+	    nil
 	  end
 
 	  def application
@@ -157,4 +157,6 @@ MyApp はアプリケーションモジュールの名前を指定する
 * ApplicationTask の場合、 `RELEASE_TAG={タグ} cap {production|staging} deploy` コマンドを発行
 
 bundler 内から呼び出すので、 capistrano は Gemfile に含まれる必要がある
+
+editor を指定しない場合、 `VERSION="..."` の部分を検出し、自動でマイナーバージョンを上げる
 
