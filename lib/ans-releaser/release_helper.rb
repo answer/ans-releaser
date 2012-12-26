@@ -13,21 +13,24 @@ module Ans::Releaser::ReleaseHelper
         sh "#{editor} #{version_file}"
       else
         version_content = []
+        version_pattern = /VERSION\s*=\s*"([0-9.]*)"/
+
         File.open version_file, "r" do |f|
           while line = f.gets
-            if line =~ /VERSION\s*=\s*"([0-9.]*)"/
+            if line =~ version_pattern
               old_version = $1
               new_version = $1.split(".").tap{|versions|
                 minor = versions.pop.to_i + 1
                 versions.push minor
               }.join(".")
+              line.gsub! version_pattern, "VERSION = #{new_version}"
             end
             version_content.push line
           end
         end
 
         File.open version_file, "w" do |f|
-          f.puts version_content.join "\n"
+          f.puts version_content.join
         end
       end
       git_commit version_file, "up version"
@@ -98,7 +101,7 @@ module Ans::Releaser::ReleaseHelper
 
   def guard_already_tagged(stage)
     if `git tag 2>&1`.split(/\n/).include?(version_tag stage)
-      raise("このタグは既に存在します。 config/initializers/version.rb のバージョンを上げてください")
+      raise("このタグは既に存在します。 #{version_file} のバージョンを上げてください")
     end
   end
 
