@@ -16,6 +16,7 @@ module Ans::Releaser::GemTask
     # バージョンを再読み込み
     load version_file
     @gemspec = nil
+    Bundler.clear_gemspec_cache
   end
 
   def is_rubygem
