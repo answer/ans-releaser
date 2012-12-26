@@ -9,7 +9,7 @@ module Ans::Releaser::ReleaseHelper
     end
 
     task :up_version do
-      unless editor.empty?
+      if editor
         sh "#{editor} #{version_file}"
       else
         File.open version_file, "r" do |f|
@@ -26,8 +26,8 @@ module Ans::Releaser::ReleaseHelper
           end
         end
 
-        File.open version_content, "w" do |f|
-          f.puts version_content
+        File.open version_file, "w" do |f|
+          f.puts version_content.join "\n"
         end
       end
       git_commit version_file, "up version"
@@ -51,7 +51,6 @@ module Ans::Releaser::ReleaseHelper
   end
 
   def editor
-    "vi"
   end
 
   def depends_on
