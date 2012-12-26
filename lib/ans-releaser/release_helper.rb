@@ -12,8 +12,8 @@ module Ans::Releaser::ReleaseHelper
       if editor
         sh "#{editor} #{version_file}"
       else
+        version_content = []
         File.open version_file, "r" do |f|
-          version_content = []
           while line = f.gets
             if line =~ /VERSION\s*=\s*"([0-9.]*)"/
               old_version = $1
