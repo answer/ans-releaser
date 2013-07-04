@@ -36,9 +36,10 @@ module Ans::Releaser::ApplicationTask
   end
 
   def deploy(stage)
-    cap_stage = stage
-    cap_stage = "production" if stage == :release
-    sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{cap_stage} deploy'"
+    sh "sh -c 'RELEASE_TAG=#{version_tag stage} cap #{deploy_stage stage} deploy'"
+  end
+  def deploy_stage(stage)
+    (stage == :release) ? "production" : stage
   end
 
 end
