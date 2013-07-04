@@ -142,13 +142,13 @@ MyApp はアプリケーションモジュールの名前を指定する
 	  def depends_on
 	    [] # バージョンファイルを変更する前に実行するタスク
 	  end
-    def deploy_stage(stage)
-      # deploy する stage 名を返す
-      # デフォルトは release なら production, そうでなければ stage 名を返す
-      # 複数のサイトにスイッチするアプリケーションの場合は、
-      # 例えば ENV["SITE"] を prefix にするなどする
-      (stage == :release) ? "production" : stage
-    end
+    	  def deploy_stage(stage)
+	    # deploy する stage 名を返す
+      	    # デフォルトは release なら production, そうでなければ stage 名を返す
+      	    # 複数のサイトにスイッチするアプリケーションの場合は、
+      	    # 例えば ENV["SITE"] を prefix にするなどする
+      	    (stage == :release) ? "production" : stage
+    	  end
 	end
 
 	ReleaseTask.new.build_release_tasks
