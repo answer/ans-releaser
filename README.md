@@ -14,6 +14,10 @@ ans-releaser
 
 Rakefile や、 lib/tasks/release.rake 等に追加
 
+### ファイルの追加等
+
+	curl -L https://raw.github.com/answer/ans-releaser/master/install.sh | bash
+
 gem のリリース
 --------------
 
