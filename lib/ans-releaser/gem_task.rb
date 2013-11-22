@@ -9,7 +9,7 @@ module Ans::Releaser::GemTask
   end
 
   def version_file
-    @version_file ||= Dir["lib/*/version.rb"].first
+    @version_file ||= Dir["lib/**/version.rb"].first
   end
 
   def after_up_version
